@@ -894,3 +894,13 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,rubymine+all,jetbrains+all,vim,emacs,intellij+iml,ruby,rails,nanoc,git,macos,windows
 A
 
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
