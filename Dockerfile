@@ -5,7 +5,7 @@ ENV LANG C.UTF-8 \
 
 ENV BUILD_PACKAGES="build-base" \
     DB_PACKAGES="sqlite-dev postgresql-dev" \
-    RAILS_PACKAGES="tzdata nodejs imagemagick yarn" \
+    RAILS_PACKAGES="tzdata nodejs imagemagick yarn gcompat" \
     FAVORITE_PACKAGES="less"
 
 RUN apk update && \
