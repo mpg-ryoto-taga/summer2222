@@ -22,5 +22,3 @@ WORKDIR /app
 COPY Gemfile \
      Gemfile.lock \
      /app/
-
-RUN bundle install --jobs=4
