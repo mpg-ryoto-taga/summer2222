@@ -52,7 +52,7 @@ $ docker-compose up
 以下のコマンドでテストを実行できます。
 
 ```
-$ docker-compose run --rm web rails test
+$ docker-compose run --rm web bundle exec rails test
 ```
 ## その他
 何らかのバグを発見した場合、以下からissueを立ててもらえると幸いです。
