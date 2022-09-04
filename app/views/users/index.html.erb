@@ -3,7 +3,7 @@
 
 <%= will_paginate %>
 
-<%= form_with(url: relationship_follow_all, local: true) do |f| %>
+<%= form_with(url: relationship_follow_all_path, local: true) do |f| %>
   <%= f.submit '一括フォロー', class: 'button' %> 
 
   <ul class="users">
