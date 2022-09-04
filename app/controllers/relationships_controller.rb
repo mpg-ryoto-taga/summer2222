@@ -20,14 +20,20 @@ class RelationshipsController < ApplicationController
   end
 
   def create_all
-    users_id_list = params[:users].keys # チェックされたユーザのidを配列に格納
-
-    users_id_list.each |id| do # 配列に含まれるユーザを1人ずつフォロー
-      user = User.find(id)
-      #current_user.follow(User.find(params[:id]))
-      current_user.active_relationships.build(followed_id: user.id)
+    respond_to do |format|
+      if params[:users].nil? # チェックがない場合
+        format.html { redirect_to users_path }
+      else # チェックされたユーザを一括フォロー
+        users_id_list = params[:users].map(&:to_i) # チェックされたユーザのidをint型で配列に格納
+        users_id_list.each do |id| # 配列に含まれるユーザを1人ずつフォロー
+          if current_user.following.ids.include?(id) # チェックされたユーザをすでにフォローしていたら次のidへ
+            next
+          end
+          user = User.find(id)
+          current_user.follow(user)
+        end
+        format.html { redirect_to users_path }
+      end
     end
-
-    redirect_to users_path
   end
 end
