@@ -89,6 +89,14 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   private
 
   def downcase_email
