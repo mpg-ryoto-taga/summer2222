@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  # フォローしてるユーザ
   has_many :active_relationships, class_name: 'Relationship',
            foreign_key: "follower_id",
            dependent: :destroy
+  # フォローされているユーザ
   has_many :passive_relationships, class_name: "Relationship",
            foreign_key: 'followed_id',
            dependent: :destroy
@@ -76,7 +78,7 @@ class User < ApplicationRecord
   end
 
   def follow(other_user)
-    following << other_user
+    following << other_user # folling配列の最後にother_userを入れる
   end
 
   def unfollow(other_user)
@@ -85,6 +87,14 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
   end
 
   private

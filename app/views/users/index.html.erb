@@ -1,11 +1,27 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :name_cont, placeholder: 'user name' %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
 <%= will_paginate %>
 
-<ul class="users">
-  <%= render @users%>
-</ul>
-
+<%= form_with(url: create_all_relationships_path, local: true) do |f| %>
+  <%= f.submit 'Follow selected user', class: 'button' %> 
+  <ul class="users">
+    <% @users.each do |user| %>
+      <li>
+        <%= gravatar_for user, size: 50 %>
+        <%= link_to user.name, user %>
+        <%= check_box_tag 'users[]', user.id %>
+        <% if current_user.admin? && !current_user?(user) %>
+          | <%= link_to "delete", user, method: :delete,
+                        data: { confirm: "You sure?" } %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 <%= will_paginate %>
-
