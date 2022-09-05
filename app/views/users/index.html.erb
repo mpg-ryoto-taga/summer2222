@@ -1,11 +1,15 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :name_cont, placeholder: 'user name' %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
 <%= will_paginate %>
 
 <%= form_with(url: create_all_relationships_path, local: true) do |f| %>
-  <%= f.submit '一括フォロー', class: 'button' %> 
-
+  <%= f.submit 'Follow selected user', class: 'button' %> 
   <ul class="users">
     <% @users.each do |user| %>
       <li>
